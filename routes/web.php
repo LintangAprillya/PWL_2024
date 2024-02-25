@@ -1,6 +1,13 @@
 <?php
 
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\aboutController;
+use App\Http\Controllers\articlesController;
+use App\Http\Controllers\index;
+use App\Http\Controllers\indexController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -73,3 +80,28 @@ Route::get('/user/{name?}', function ($name='John') {
 Route::get('/user/profile', function(){
     
 })->name('profile');
+
+///membuat controller
+Route::get('/helloController', 
+[WelcomeController::class,'hello']); 
+
+//controller index
+Route::get('/indexcontroller', 
+[indexController::class,'indexcontroller']);
+
+//controller about
+Route::get('/about',
+[aboutController::class,'about']);
+
+//controller id
+Route::get('/articles/{id}',
+ [articlesController::class,'show']);
+
+
+ ///resource controller
+//poin b
+Route::resoure('photos', PhotoController::class);
+
+//poin d
+Route::resouce('photos', PhotoController::class)->only(['index', 'show']);
+Route::resource('photos', PhotoController::class)->except([ 'create', 'store', 'update', 'destroy']);
