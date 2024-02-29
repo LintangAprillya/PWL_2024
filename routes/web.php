@@ -100,8 +100,27 @@ Route::get('/articles/{id}',
 
  ///resource controller
 //poin b
-Route::resoure('photos', PhotoController::class);
+Route::resource('photos', PhotoController::class);
+
 
 //poin d
-Route::resouce('photos', PhotoController::class)->only(['index', 'show']);
-Route::resource('photos', PhotoController::class)->except([ 'create', 'store', 'update', 'destroy']);
+Route::resource('photos', PhotoController::class)->only(['index', 'show']);
+
+Route::resource('photos', PhotoController::class)->except(['create', 'store', 'update', 'destroy']);
+
+
+///view - membuat view
+//poin b
+Route::get('/greeting', function () { 
+    return view('blog.hello', ['name' => 'Lintang']); 
+    });
+
+//poin d
+Route::resource('photos', PhotoController::class)->only([ 
+    'index', 'show' 
+    ]); 
+Route::resource('photos', PhotoController::class)->except([ 
+        'create', 'store', 'update', 'destroy' 
+        ]); 
+
+Route::get('/greeting', [WelcomeController::class, 'greeting']); 
